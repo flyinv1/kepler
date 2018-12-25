@@ -1,0 +1,74 @@
+.landing {
+    position: relative;
+    height: 100%;
+    align-content: stretch;
+}
+
+.landing-content {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.landing-content > div:nth-child(1) {
+    padding: 10rem 3rem;
+}
+
+.landing-content > div:nth-child(2) {
+    padding: 3rem 3rem;
+}
+
+.landing-animation {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /*background-color: red;*/
+}
+
+/*SVG*/
+
+#system-animation {
+    width: 100vw;
+    height: 100vh;
+}
+
+#system {
+    transform: translateY(85%) translateX(90%);
+}
+
+#sun {
+    fill: var(--primary);
+}
+
+.animation-body {
+    animation-name: orbit;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+.animation-orbit {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1px;
+}
+
+#body-1 {
+    fill: var(--primary);
+    stroke: none;
+    animation-duration: 15s;
+}
+
+#body-2 {
+    fill: var(--primary);
+    stroke: none;
+    animation-duration: 28s;
+}
+
+@keyframes orbit {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}

@@ -1,0 +1,33 @@
+@import '../../constants.css';
+
+.tabbar-controller {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+}
+
+.tabbar-content {
+    width: 100%;
+}
+
+.tabbar-tab {
+    cursor: pointer;
+    /*background-color: lightcoral;*/
+    padding: 0 2rem;
+    outline: solid 1px var(--border);
+    box-sizing: border-box;
+    height: 2.6rem;
+    margin-right: 1px;
+    border-top: 4px solid transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.tabbar-selected {
+    border-top: 4px solid var(--primary);
+}
+
