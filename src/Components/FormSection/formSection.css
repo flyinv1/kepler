@@ -1,0 +1,15 @@
+.form-section-title-wrapper {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.8rem;
+}
+
+.form-section-title {
+    color: var(--border);
+    margin-bottom: 0.2rem;
+}
+
+.form-section-inputs {
+    display: flex;
+    flex-direction: row;
+}

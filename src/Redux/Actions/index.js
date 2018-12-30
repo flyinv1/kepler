@@ -1,8 +1,12 @@
-import { TEST } from './constants';
+import {ADD_BODY, UPDATE_CENTER} from './constants';
 
-export const addItem = item => ({
-    type: TEST,
-    payload: {
-        label: item
-    }
+export const addBody = body => ({
+    type: ADD_BODY,
+    payload: body
 });
+
+export const updateCenterBody = body => ({
+    type: UPDATE_CENTER,
+    payload: body
+});
+

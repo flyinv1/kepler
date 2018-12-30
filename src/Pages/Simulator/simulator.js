@@ -5,6 +5,7 @@ import Computer from "./Computer/computer";
 import Mission from "./Mission/mission";
 import Footer from "../../Components/Footer/footer";
 import "./simulator.css";
+import Logger from "./Logger/logger";
 
 let tabs = [
     {tab: System, title: "System"},
@@ -29,7 +30,7 @@ class Simulator extends Component {
 
                         </div>
                         <div className={"log-container"}>
-
+                            <Logger/>
                         </div>
                     </div>
                     <div className={"simulator-tab-container"}>

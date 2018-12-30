@@ -1,12 +1,12 @@
 body {
     font-family: Menlo, source-code-pro, monospace, sans-serif;
     color: var(--primary);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-html, body, h1, h2, h3, h4, p, a, div, li, ul {
+* {
     padding: 0;
     margin: 0;
 }
@@ -17,8 +17,11 @@ h1 {
 }
 
 h2, h3, h4, h5 {
+    font-size: 0.8rem;
+}
+
+h2, h3, h4, h5, p, input, label {
     font-weight: normal;
-    font-size: 0.7rem;
 }
 
 a {
@@ -36,4 +39,39 @@ ul {
 
 li {
     padding-top: 0.2rem;
+}
+
+input {
+    outline: none;
+    border: 1px solid var(--border);
+    padding: 0.4rem;
+    color: var(--primary);
+    font-family: Menlo, source-code-prop, monospace, sans-serif;
+    background-color: transparent;
+}
+
+label {
+    color: var(--label);
+}
+
+button {
+    outline: none;
+    padding: 0.4rem;
+    border: 1.5px solid var(--button_border);
+    font-family: Menlo, source-code-prop, monospace, sans-serif;
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    background-color: transparent;
+    min-width: 1.8rem;
+    min-height: 1.8rem;
+}
+
+button:hover {
+    border-color: var(--light_border);
+}
+
+::selection {
+    background-color: var(--select);
+    color: var(--primary);
 }
