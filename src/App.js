@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 //Pages
 import Landing from "./Pages/Landing/landing";

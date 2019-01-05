@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {nav} from "../../utils";
-import './notFound.css';
+import styles from './notFound.module.scss';
 
 class NotFound extends Component {
 
     render() {
         return (
-            <div className="not-found">
-                <ul className={"not-found-router"}>
+            <div className={styles.container}>
+                <ul className={styles.router}>
                     <li>Lost in space?</li>
                     <li><a href={nav("")}>Go home</a></li>
                     <li><a href={nav("simulator")}>Simulator</a></li>

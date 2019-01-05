@@ -4,11 +4,11 @@ import System from "./System/system";
 import Computer from "./Computer/computer";
 import Mission from "./Mission/mission";
 import Footer from "../../Components/Footer/footer";
-import "./simulator.css";
+import styles from "./simulator.module.scss";
 
 let tabs = [
     {tab: System, title: "System"},
-    {tab: Mission, title: "Mission"},
+    // {tab: Mission, title: "Mission"},
     {tab: Computer, title: "Computer"}
 ];
 
@@ -22,17 +22,15 @@ class Simulator extends Component {
 
     render() {
         return (
-            <div className={"simulator"}>
-                <div className={"simulator-content"}>
-                    <div className={"simulator-outs"}>
-                        <div className={"simulator-animator-container"}>
-
+            <div className={styles.container}>
+                <div className={styles.content}>
+                    <div className={styles.outputs}>
+                        <div className={styles.animator}>
                         </div>
-                        <div className={"log-container"}>
-
+                        <div className={styles.logs}>
                         </div>
                     </div>
-                    <div className={"simulator-tab-container"}>
+                    <div className={styles.tabs}>
                         <Tabbar tabs={tabs}/>
                     </div>
                 </div>

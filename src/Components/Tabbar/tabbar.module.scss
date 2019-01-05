@@ -1,6 +1,4 @@
-@import '../../constants.css';
-
-.tabbar-controller {
+.controller {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -8,13 +6,12 @@
     border-bottom: 1px solid var(--border);
 }
 
-.tabbar-content {
+.content {
     width: 100%;
 }
 
-.tabbar-tab {
+.tab {
     cursor: pointer;
-    /*background-color: lightcoral;*/
     padding: 0 2rem;
     outline: solid 1px var(--border);
     box-sizing: border-box;
@@ -27,7 +24,7 @@
     font-size: 0.9rem;
 }
 
-.tabbar-selected {
+.selected {
     border-top: 4px solid var(--primary);
 }
 

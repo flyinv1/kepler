@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./landing.css";
+import styles from "./landing.module.scss";
 import {nav} from "../../utils";
 
 class Landing extends Component {
@@ -18,29 +18,14 @@ class Landing extends Component {
 
     render() {
         return (
-            <div className={"landing"}>
-                <div className={"landing-animation"}>
-                    <svg id={"system-animation"} version={1.1} xmlns="http://www.w3.org/2000/svg">
-                        <g id={"system"}>
-                            <circle cx={0} cy={0} r={12} id={"sun"}/>
-                            <g>
-                                <circle cx={0} cy={0} r={200} className={"animation-orbit"}/>
-                                <circle cx={-200} cy={0} r={6} id={"body-1"} className={"animation-body"}/>
-                            </g>
-                            <g>
-                                <circle cx={0} cy={0} r={400} className={"animation-orbit"}/>
-                                <circle cx={-365.18} cy={163.23} r={4} id={"body-2"} className={"animation-body"}/>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-                <div className={"landing-content"}>
+            <div className={styles.landing}>
+                <div className={styles.landingContent}>
                     <div>
-                        <h1>Keplerian Orbit Simulator</h1>
+                        <h1>N-Body Simulator</h1>
                         <ul>
                             <li>press enter to begin</li>
-                            <li>read the <a>documentation</a></li>
-                            <li>view <a>data</a></li>
+                            <li>read the <a href={nav("documentation")}>documentation</a></li>
+                            <li>view <a href={nav("data")}>data</a></li>
                         </ul>
                     </div>
                     <div>

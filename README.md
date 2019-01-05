@@ -1,3 +1,5 @@
-# Keplerian Orbit Simulator
----
-A rudimentary 2D orbital mechanics simulation web application.
+### ~~Keplerian Orbit Simulator~~
+
+# N-body solver
+
+An n-body iterative simulation using RK4.

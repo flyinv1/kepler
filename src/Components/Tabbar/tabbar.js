@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './tabbar.css';
+import styles from './tabbar.module.scss';
 
 class Tabbar extends Component {
 
@@ -23,19 +23,19 @@ class Tabbar extends Component {
         let Tab = this.props.tabs[this.state.index].tab || <h1>Error displaying content</h1>;
         return (
             <section>
-                <div className={"tabbar-controller"}>
+                <div className={styles.controller}>
                     {
                         this.props.tabs.map((tab, i) => {
-                            let selected = (i === this.state.index) ? "tabbar-selected" : "";
+                            let selected = (this.state.index === i) ? styles.selected : "";
                             return (
-                                <div key={i} onClick={() => this.selectTab(i)} className={'tabbar-tab ' + selected}>
+                                <div key={i} onClick={() => this.selectTab(i)} className={[styles.tab, selected].join(' ')}>
                                     {tab.title}
                                 </div>
                             )}
                         )
                     }
                 </div>
-                <div className={"tabbar-content"}>
+                <div className={styles.content}>
                     <Tab/>
                 </div>
             </section>
