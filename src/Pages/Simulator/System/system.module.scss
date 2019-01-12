@@ -1,0 +1,86 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.section {
+    padding: 1.0rem;
+}
+
+.sectionHeader {
+    border-bottom: solid 1px var(--border);
+    padding: 0.4rem 0;
+}
+
+.sectionContent {
+
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 1.0rem 0 0 0;
+}
+
+.formRow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.formRow > div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.0rem 1.0rem 0;
+}
+
+.formRow > div > label {
+    margin-bottom: 0.2rem;
+}
+
+.submitRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.bodiesTable {
+    width: 100%;
+    border: 1px solid var(--border);
+    margin-top: 1.0rem;
+}
+
+.bodiesTable {
+    border-collapse: collapse;
+
+    .tableHeader {
+        color: var(--label);
+    }
+
+    tr, td {
+        border-collapse: collapse;
+        border-bottom: 1px solid var(--border);
+    }
+
+    td {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.7rem;
+    }
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0.6rem 0;
+}
+
+.buttonRow > *:not(:last-child) {
+    margin-right: 0.5rem;
+}

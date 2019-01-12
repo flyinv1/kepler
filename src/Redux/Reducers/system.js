@@ -1,25 +1,20 @@
-import {ADD_BODY, UPDATE_CENTER} from "../Actions/constants";
+import {ADD_BODY, BODIES} from "../Actions/constants";
+import {cache, getCached} from "../Session";
+
+
 
 const initialState = {
-    bodes: [],
-    centerBody: {
-        radius: 0,
-        mass: 0,
-        mu: 0,
-    }
+    bodies: getCached(BODIES) || [],
 };
 
 export default function(state = initialState, action) {
     switch (action.type) {
         case ADD_BODY:
+            let newBodies = [...state.bodies, action.payload];
+            cache(BODIES, newBodies);
             return {
                 ...state,
-                // bodies: [...state.bodies, action.payload],
-            };
-        case UPDATE_CENTER:
-            return {
-                ...state,
-                centerBody: action.payload,
+                bodies: newBodies,
             };
         default: return state
     }

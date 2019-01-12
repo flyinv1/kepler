@@ -1,8 +1,12 @@
-export function normalize(vector) {
-    return Math.sqrt(vector.reduce((acc, n) => acc + Math.pow(n, 2), []));
+export function magnitude(vector) {
+    return Math.sqrt(vector.reduce((acc, n) => acc + Math.pow(n, 2), 0));
 }
 
-export function addVectors(vec1, vec2) {
+export function nonReducedMagnitude(vector) {
+    return vector.reduce((acc, n) => acc + Math.pow(n, 2), 0);
+}
+
+export function addVec(vec1, vec2) {
     return [vec1, vec2].reduce((acc, vec) => vec.map((val, i) => (acc[i] || 0) + val), []);
 }
 
@@ -17,4 +21,13 @@ export function cross(vec1, vec2) {
         vec1[2]*vec2[0] - vec1[0]*vec2[2],
         vec1[0]*vec2[1] - vec1[1]*vec2[0],
     ]
+}
+
+export function normalize(vector) {
+    let mag = magnitude(vector);
+    return vector.map((c) => (c / mag));
+}
+
+export function mscalar(vector, scalar) {
+    return vector.map((v) => v*scalar);
 }

@@ -3,7 +3,7 @@
 body {
     font-family: Menlo, source-code-pro, monospace, sans-serif;
     color: var(--primary);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -11,7 +11,7 @@ body {
 .App {
     background-color: var(--background);
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 html, body, h1, h2, h3, h4, p, a, div, li, ul {
@@ -29,6 +29,11 @@ h2, h3, h4, h5 {
     font-size: 0.7rem;
 }
 
+h2 {
+    font-size: 0.8rem;
+    color: var(--border);
+}
+
 a {
     color: var(--primary);
     text-decoration: underline;
@@ -44,4 +49,60 @@ ul {
 
 li {
     padding-top: 0.2rem;
+}
+
+input {
+    outline: none;
+    border: 1px solid var(--border);
+    padding: 0.4rem;
+    color: var(--primary);
+    font-family: Menlo, source-code-prop, monospace, sans-serif;
+    background-color: transparent;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input:invalid {
+    outline: none;
+    box-shadow: none;
+    color: lightcoral;
+}
+
+label {
+    color: var(--label);
+}
+
+button {
+    outline: none;
+    padding: 0.4rem;
+    border: 1.5px solid var(--button_border);
+    font-family: Menlo, source-code-prop, monospace, sans-serif;
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    background-color: transparent;
+    min-width: 1.8rem;
+    min-height: 1.8rem;
+    transition: border 100ms;
+}
+
+button:hover {
+    border-color: var(--light_border);
+}
+
+button:disabled {
+    border-color: var(--border);
+    color: var(--border);
+}
+
+::selection {
+    background-color: var(--select);
+    color: var(--primary);
 }
