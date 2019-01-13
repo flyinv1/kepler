@@ -2,4 +2,4 @@
 
 # N-body solver
 
-An n-body iterative simulation using RK4.
+An n-body simulation using the semi-implicit euler iterative method.
