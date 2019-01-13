@@ -1,4 +1,4 @@
-import {ADD_BODY, BODIES} from "../Actions/constants";
+import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID} from "../Actions/constants";
 import {cache, getCached} from "../Session";
 
 
@@ -10,11 +10,18 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
         case ADD_BODY:
-            let newBodies = [...state.bodies, action.payload];
-            cache(BODIES, newBodies);
+            let appended = [...state.bodies, action.payload];
+            cache(BODIES, appended);
             return {
                 ...state,
-                bodies: newBodies,
+                bodies: appended,
+            };
+        case REMOVE_BODY_BY_ID:
+            let removed = [...state.bodies].filter(body => body.id !== action.payload);
+            cache(BODIES, removed);
+            return {
+                ...state,
+                bodies: removed
             };
         default: return state
     }

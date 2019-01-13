@@ -10,10 +10,12 @@ import {addVec, mscalar} from "./vector";
 
 export default function integrateSystem(bodies, step, time) {
     for (let i = 0; i<time; i+=step) {
+        //Iterate over all bodies in the system
         bodies = bodies.map((body, i) => {
+            // Calculate acceleration vector gravitational forces from all other bodies in system, multiply acceleration by timestep for dv, add dv to current velocity
             let velocity = addVec(mscalar(bodies.reduce((accumulator, otherBody, j) => {
-                if (j === i) return accumulator;
-                let acceleration = gravAcc(body, otherBody);
+                if (j === i) return accumulator; //Exclude the current body
+                let acceleration = gravAcc(body, otherBody); // Calculate acceleration due to gravity from other body
                 accumulator = addVec(accumulator, acceleration);
                 return accumulator;
             }, []), step), body.velocity);

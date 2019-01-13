@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import styles from './system.module.scss';
 import {checkNormalization, formatVector, randomTag} from "../../../utils";
 import { getBodies } from "../../../Redux/Selectors";
-import { addBody } from "../../../Redux/Actions";
+import {addBody, removeBodyById} from "../../../Redux/Actions";
 
 class System extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            selected: -1,
             adding: false,
             valid: false,
             r: [0, 0, 0],
@@ -32,6 +33,15 @@ class System extends Component {
             radius: this.state.bodyRadius,
         });
         this.clearFields();
+    }
+
+    editSelected() {
+
+    }
+
+    removeSelected() {
+        this.props.removeBody(this.props.bodies[this.state.selected].id);
+        this.setState({selected: -1})
     }
 
     cancel() {
@@ -83,15 +93,21 @@ class System extends Component {
         })
     }
 
+    setSelected(index) {
+        this.setState({selected: (index === this.state.selected) ? -1 : index})
+    }
+
     render() {
         let dim = ["x", "y", "z"];
+        console.log(this.state.selected);
         return (
             <div className={styles.container}>
                 <div className={styles.section}>
                     <div className={styles.sectionHeader}>
                         <h2>Bodies</h2>
                     </div>
-                    <div className={styles.sectionContent}>
+                    <div>
+                        { this.props.bodies &&
                         <table className={styles.bodiesTable}>
                             <tbody>
                                 <tr className={styles.tableHeader}>
@@ -102,16 +118,22 @@ class System extends Component {
                                     <td>R [km]</td>
                                 </tr>
                                 {
-                                    this.props.bodies.map((body) => {
-                                        return <tr key={body.name}>
-                                            {Object.values(body).map((val, i) => {
+                                    this.props.bodies.map((body, i) => {
+                                        return (
+                                        <tr
+                                            key={body.name}
+                                            onClick={() => this.setSelected(i)}
+                                            className={(i === this.state.selected) ? styles.selectedRow : ""}
+                                        >
+                                            {Object.values(body).slice(1).map((val, i) => {
                                                 return <td key={i}>{formatVector(val)}</td>
                                             })}
                                         </tr>
+                                        )
                                     })
                                 }
                             </tbody>
-                        </table>
+                        </table> }
                     </div>
                     {
                         this.state.adding &&
@@ -154,9 +176,12 @@ class System extends Component {
                         </div>
                     }
                     {
+                        //This is garbage hahaha
                         !this.state.adding &&
                         <div className={styles.buttonRow}>
                             <button onClick={this.toggleAdd.bind(this)}>New Body</button>
+                            <button onClick={this.editSelected.bind(this)} disabled={!(this.state.selected >= 0) }>Edit</button>
+                            <button onClick={this.removeSelected.bind(this)} disabled={!(this.state.selected >= 0)}>Delete</button>
                         </div> ||
                         <div className={styles.buttonRow}>
                             <button onClick={this.addValidBody.bind(this)} disabled={!this.state.valid}>Save</button>
@@ -179,6 +204,9 @@ const mapDispatchToEvents = (dispatch) => {
     return {
         addBody: (body) => {
             dispatch(addBody(body))
+        },
+        removeBody: (id) => {
+            dispatch(removeBodyById(id))
         }
     }
 };

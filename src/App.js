@@ -23,7 +23,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-
         var bods = [
             {
                 name: "earth",

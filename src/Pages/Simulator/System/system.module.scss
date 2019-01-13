@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+    flex-grow: 1;
+    height: 1000px;
 }
 
 .section {
@@ -12,10 +14,6 @@
 .sectionHeader {
     border-bottom: solid 1px var(--border);
     padding: 0.4rem 0;
-}
-
-.sectionContent {
-
 }
 
 .formContainer {
@@ -71,6 +69,10 @@
     td {
         padding: 0.5rem 0.8rem;
         font-size: 0.7rem;
+    }
+
+    .selectedRow {
+        background-color: var(--select);
     }
 }
 
