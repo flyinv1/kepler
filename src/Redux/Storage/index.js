@@ -6,3 +6,4 @@ export function getCached(key) {
     return JSON.parse(sessionStorage.getItem(key));
 }
 
+

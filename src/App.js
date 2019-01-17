@@ -4,8 +4,7 @@ import React, { Component } from 'react';
 import Landing from "./Pages/Landing/landing";
 import Simulator from "./Pages/Simulator/simulator";
 import NotFound from "./Pages/NotFound/notFound.js";
-import {addVectors, cross, dot} from "./Computation/vector";
-import integrateSystem from "./Computation/symplecticeuler";
+import symplecticeuler from "./Computation/symplecticeuler";
 
 const Pages = {
     '': Landing,
@@ -23,28 +22,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-        var bods = [
-            {
-                name: "earth",
-                position: [0, 0, 0],
-                velocity: [0, 0, 0],
-                mass: 5.971e24,
-            },
-            {
-                name: "kaeden",
-                position: [0, 0, 6378],
-                velocity: [0, 0, 0],
-                mass: 60,
-            },
-            {
-                name: "matt",
-                position: [0, 3000, 3000],
-                velocity: [0, 0, 0],
-                mass: 5.0e15,
-            }
-        ];
-
-        integrateSystem(bods, 1.0, 1000);
         window.addEventListener("hashchange", () => {
             this.setState({
                 location: window.location.hash

@@ -1,7 +1,5 @@
-import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID} from "../Actions/constants";
-import {cache, getCached} from "../Session";
-
-
+import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID} from "../constants";
+import {cache, getCached} from "../Storage";
 
 const initialState = {
     bodies: getCached(BODIES) || [],

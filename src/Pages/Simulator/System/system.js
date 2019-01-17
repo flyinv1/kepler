@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './system.module.scss';
-import {checkNormalization, formatVector, randomTag} from "../../../utils";
+import {checkNormalization, spacedVectorString, randomTag} from "../../../utils";
 import { getBodies } from "../../../Redux/Selectors";
 import {addBody, removeBodyById} from "../../../Redux/Actions";
 
@@ -99,7 +99,6 @@ class System extends Component {
 
     render() {
         let dim = ["x", "y", "z"];
-        console.log(this.state.selected);
         return (
             <div className={styles.container}>
                 <div className={styles.section}>
@@ -107,7 +106,7 @@ class System extends Component {
                         <h2>Bodies</h2>
                     </div>
                     <div>
-                        { this.props.bodies &&
+                        { this.props.bodies.length > 0 &&
                         <table className={styles.bodiesTable}>
                             <tbody>
                                 <tr className={styles.tableHeader}>
@@ -126,7 +125,7 @@ class System extends Component {
                                             className={(i === this.state.selected) ? styles.selectedRow : ""}
                                         >
                                             {Object.values(body).slice(1).map((val, i) => {
-                                                return <td key={i}>{formatVector(val)}</td>
+                                                return <td key={i}>{spacedVectorString(val)}</td>
                                             })}
                                         </tr>
                                         )

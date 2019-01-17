@@ -18,7 +18,7 @@ class Landing extends Component {
 
     render() {
         return (
-            <div className={styles.landing}>
+            <div className={styles.container}>
                 <div className={styles.landingContent}>
                     <div>
                         <h1>N-Body Simulator</h1>
