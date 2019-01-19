@@ -4,6 +4,7 @@ import styles from './system.module.scss';
 import {checkNormalization, spacedVectorString, randomTag} from "../../../utils";
 import { getBodies } from "../../../Redux/Selectors";
 import {addBody, removeBodyById} from "../../../Redux/Actions";
+import bodies from './../../../Data';
 
 class System extends Component {
 
@@ -33,6 +34,12 @@ class System extends Component {
             radius: this.state.bodyRadius,
         });
         this.clearFields();
+    }
+
+    addSavedBody(body) {
+        if (!this.props.bodies.filter((bod) => bod.id === body.id).length > 0) {
+            this.props.addBody(body)
+        }
     }
 
     editSelected() {
@@ -77,7 +84,8 @@ class System extends Component {
 
     toggleAdd() {
         this.setState({
-            adding: !this.state.adding
+            adding: !this.state.adding,
+            selected: (!this.state.adding) ? -1 : this.state.selected
         })
     }
 
@@ -102,9 +110,18 @@ class System extends Component {
         return (
             <div className={styles.container}>
                 <div className={styles.section}>
-                    <div className={styles.sectionHeader}>
-                        <h2>Bodies</h2>
-                    </div>
+                    {/*TODO:: Convert to components*/}
+                    <SectionHeader title={"Defaults"}/>
+                    {
+                        Object.values(bodies.defaults).map((body) => {
+                            return (
+                                <div key={body.id} onClick={() => this.addSavedBody(body)}>{body.name}</div>
+                            )
+                        })
+                    }
+                </div>
+                <div className={styles.section}>
+                    <SectionHeader title={"System Bodies"}/>
                     <div>
                         { this.props.bodies.length > 0 &&
                         <table className={styles.bodiesTable}>
@@ -120,13 +137,15 @@ class System extends Component {
                                     this.props.bodies.map((body, i) => {
                                         return (
                                         <tr
-                                            key={body.name}
+                                            key={body.id}
                                             onClick={() => this.setSelected(i)}
                                             className={(i === this.state.selected) ? styles.selectedRow : ""}
                                         >
-                                            {Object.values(body).slice(1).map((val, i) => {
-                                                return <td key={i}>{spacedVectorString(val)}</td>
-                                            })}
+                                            <td>{body.name}</td>
+                                            <td>{spacedVectorString(body.position)}</td>
+                                            <td>{spacedVectorString(body.velocity)}</td>
+                                            <td>{body.mass}</td>
+                                            <td>{body.radius}</td>
                                         </tr>
                                         )
                                     })
@@ -175,13 +194,12 @@ class System extends Component {
                         </div>
                     }
                     {
-                        //This is garbage hahaha
-                        !this.state.adding &&
+                        (!this.state.adding) ?
                         <div className={styles.buttonRow}>
                             <button onClick={this.toggleAdd.bind(this)}>New Body</button>
                             <button onClick={this.editSelected.bind(this)} disabled={!(this.state.selected >= 0) }>Edit</button>
                             <button onClick={this.removeSelected.bind(this)} disabled={!(this.state.selected >= 0)}>Delete</button>
-                        </div> ||
+                        </div> :
                         <div className={styles.buttonRow}>
                             <button onClick={this.addValidBody.bind(this)} disabled={!this.state.valid}>Save</button>
                             <button onClick={this.cancel.bind(this)}>Cancel</button>
@@ -192,6 +210,12 @@ class System extends Component {
         )
     }
 }
+
+const SectionHeader = (props) => {
+    return (<div className={styles.sectionHeader}>
+        <h2>{props.title}</h2>
+    </div>)
+};
 
 const mapStateToProps = state => {
     return {

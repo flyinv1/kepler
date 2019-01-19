@@ -4,10 +4,11 @@ import {cache, getCached} from "../Storage";
 const initialState = {
     logs: getCached(LOGS) || [
         {
-            tag: "hello",
-            content: [
-                1, 2, 3
-            ]
+            tag: "STARTUP",
+            content: "Welcome to Kepler!"
+        }, {
+            tag: "STARTUP",
+            content: "Add a body and start integrating!"
         }
     ],
 };

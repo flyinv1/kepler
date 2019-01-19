@@ -4,8 +4,9 @@ import System from "./System/system";
 import Computer from "./Computer/computer";
 import Mission from "./Mission/mission";
 import Footer from "../../Components/Footer/footer";
-import styles from "./simulator.module.scss";
 import Logger from "./Logger/logger";
+import Controls from "./Controls/controls";
+import styles from "./simulator.module.scss";
 
 let tabs = [
     {tab: System, title: "System"},
@@ -25,6 +26,9 @@ class Simulator extends Component {
                 <div className={styles.content}>
                     <div className={styles.outputs}>
                         <div className={styles.animator}>
+                        </div>
+                        <div className={styles.controls}>
+                            <Controls/>
                         </div>
                         <div className={styles.logs}>
                             <Logger/>

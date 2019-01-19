@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Landing from "./Pages/Landing/landing";
 import Simulator from "./Pages/Simulator/simulator";
 import NotFound from "./Pages/NotFound/notFound.js";
-import symplecticeuler from "./Computation/symplecticeuler";
+import symplecticeuler from "./Computation/symplecticEuler";
 
 const Pages = {
     '': Landing,

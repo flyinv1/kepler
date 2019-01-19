@@ -1,0 +1,21 @@
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+
+}
+
+.right > button:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.hiddenButtons {
+    display: none;
+}

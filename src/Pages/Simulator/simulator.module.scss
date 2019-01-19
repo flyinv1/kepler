@@ -30,7 +30,16 @@
     border-bottom: 1px solid var(--border);
 }
 
-.logs {
-    flex-grow: 1
+.controls {
+    height: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0 0.5rem;
 }
 
+.logs {
+    height: 40%;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0 0 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

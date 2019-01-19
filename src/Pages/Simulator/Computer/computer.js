@@ -13,7 +13,7 @@ export default class Computer extends Component {
     render() {
         return (
             <div className={""}>
-                This is the computer!
+                Use these useful functions to help generate a system!
             </div>
         )
     }
