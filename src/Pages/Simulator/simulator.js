@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import Tabbar from "../../Components/Tabbar/tabbar";
+import Tabbar from "../Components/Tabbar/tabbar";
 import System from "./System/system";
 import Computer from "./Computer/computer";
 import Mission from "./Mission/mission";
-import Footer from "../../Components/Footer/footer";
+import Footer from "../Components/Footer/footer";
 import Logger from "./Logger/logger";
 import Controls from "./Controls/controls";
 import styles from "./simulator.module.scss";
 
 let tabs = [
-    {tab: System, title: "System"},
+    {tab: System, title: "Configuration"},
     // {tab: Mission, title: "Mission"},
     {tab: Computer, title: "Computer"}
 ];

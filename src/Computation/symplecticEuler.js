@@ -7,6 +7,8 @@ import {addVec, mscalar} from "./vector";
  * @param {Number} stepSize - Interval on which computations are performed
  * @param {Number} steps - The number of steps to compute
  * @param {Function} callback - a callback function
+ * @param {Function} stepFunction - function callback on every computation step
+ * @returns {Array} history - a 3D history of r and v [Time][Body][r1, r2, r3, v1, v2, v3]
  */
 
 export default function integrateSystem(bodies, stepSize, steps, callback, stepFunction) {

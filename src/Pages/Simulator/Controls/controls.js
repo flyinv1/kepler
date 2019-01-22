@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styles from './controls.module.scss';
 import {clearLogs, dispatchLog, saveComputation} from "../../../Redux/Actions";
-import {getBodies} from "../../../Redux/Selectors";
+import {getBodies, getSteps, getStepSize} from "../../../Redux/Selectors";
 import {connect} from "react-redux";
 import integrateSystem from "../../../Computation/symplecticEuler";
+import {save} from "../../../Redux/Storage";
 
 const COMP = { idle: 'IDLE', running: 'RUNNING', done: 'DONE' };
 
@@ -22,14 +23,15 @@ class Controls extends Component {
         this.props.log({
             tag: "",
             content: "Computing..."
-        })
+        });
         this.props.log({
             tag: "Initial State",
             content: this.props.bodies
         });
         //Ensure the state is updated to 'running' before taking up all of the computer's resources :/
+        //TODO:: Convert to asynchronous function
         setTimeout(() => {
-            let bodies = integrateSystem(this.props.bodies, 60, 60*24*365, () => {
+            let bodies = integrateSystem(this.props.bodies, this.props.stepSize, this.props.steps, () => {
                 this.setState({
                     computerState: COMP.done
                 })
@@ -38,7 +40,9 @@ class Controls extends Component {
             this.props.log({
                 tag: "Results",
                 content: bodies[bodies.length - 1],
-            })
+            });
+            console.log(bodies);
+            save("HISTORY", bodies);
         }, 100);
     }
 
@@ -134,6 +138,8 @@ class Controls extends Component {
 const mapStateToProps = state => {
     return {
         bodies: getBodies(state),
+        steps: getSteps(state),
+        stepSize: getStepSize(state),
     }
 };
 

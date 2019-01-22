@@ -16,6 +16,10 @@ class Logger extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.el.scrollIntoView({behavior: "smooth"});
+    }
+
     render() {
         return(
             <div className={styles.container}>
@@ -24,6 +28,8 @@ class Logger extends Component {
                         <LogItem key={i} tag={log.tag}>{JSON.stringify(log.content)}</LogItem>
                     )
                 }
+                {/*Capture scroll*/}
+                <div ref={el => {this.el = el}}/>
             </div>
         )
     }

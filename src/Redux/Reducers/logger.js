@@ -23,6 +23,7 @@ export default function(state = initialState, action) {
                 logs: appended,
             };
         case CLEAR_LOGS:
+            cache(LOGS, []);
             return {
                 ...state,
                 logs: [],

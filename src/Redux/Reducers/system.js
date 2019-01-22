@@ -1,8 +1,10 @@
-import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID} from "../constants";
+import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID, SET_STEP_SIZE, SET_STEPS, STEP_SIZE, STEPS} from "../constants";
 import {cache, getCached} from "../Storage";
 
 const initialState = {
     bodies: getCached(BODIES) || [],
+    steps: getCached(STEPS) || 365,
+    stepSize: getCached(STEP_SIZE) || 86400,
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +22,20 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 bodies: removed
+            };
+        case SET_STEPS:
+            let steps = parseInt(action.payload) || 365;
+            cache(STEPS, steps);
+            return {
+                ...state,
+                steps: steps
+            };
+        case SET_STEP_SIZE:
+            let stepSize = parseInt(action.payload) || 86400;
+            cache(STEP_SIZE, stepSize);
+            return {
+                ...state,
+                stepSize: stepSize,
             };
         default: return state
     }
