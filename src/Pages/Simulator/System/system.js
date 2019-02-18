@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './system.module.scss';
 import {checkNormalization, spacedVectorString, randomTag} from "../../../utils";
-import {getBodies, getSteps, getStepSize} from "../../../Redux/Selectors";
-import {addBody, removeBodyById, setSteps, setStepSize} from "../../../Redux/Actions";
-import savedBodies from './../../../Data';
+import {getBodies, getSavedBodies, getSteps, getStepSize} from "../../../Redux/selectors";
+import action from "../../../Redux/action";
 import SystemTable from "../../Components/SystemTable/systemTable";
+import savedBodies from "../../../Data/solarSystem";
 import SystemBodySelector from "../../Components/SystemBodySelector/systemBodySelector";
-import {getSaved, save} from "../../../Redux/Storage";
-import {BODIES, USER_BODIES} from "../../../Redux/constants";
+import {getSaved, save} from "../../../Redux/storage";
+import {
+    ADD_BODY,
+    BODIES,
+    DELETE_SAVED_USER_BODY,
+    REMOVE_BODY_BY_ID, SAVE_USER_BODY, SET_STEP_SIZE,
+    SET_STEPS,
+    UPDATE_SAVED_DATA,
+    USER_BODIES
+} from "../../../Redux/constants";
 
 class System extends Component {
 
@@ -16,7 +24,7 @@ class System extends Component {
         super(props);
         this.state = {
             selected: -1,
-            adding: false,
+            editing: false,
             valid: false,
             r: [0, 0, 0],
             v: [0, 0, 0],
@@ -28,21 +36,32 @@ class System extends Component {
         }
     }
 
-    componentDidMount() {
-        console.log(getSaved(USER_BODIES));
-    }
-
     addValidBody() {
-        let ID = randomTag().toUpperCase();
+        let ID = (this.state.selected >= 0) ? this.props.bodies[this.state.selected].id : randomTag().toUpperCase();
+
+        console.log(ID);
+
         let name = (this.state.name === "") ? ID : this.state.name;
-        this.props.addBody({
+
+        if (this.props.bodies.filter((body) => body.id === ID).length > 0) {
+            this.removeSelected();
+        }
+
+        let body = {
             id: ID,
             name: name,
             position: this.state.r.map((r) => parseFloat(r)),
             velocity: this.state.v.map((v) => parseFloat(v)),
             mass: this.state.mass,
             radius: this.state.bodyRadius,
-        });
+        };
+
+        this.props.addBody(body);
+
+        if (this.state.selected >= 0) {
+            this.props.saveBody(body);
+        }
+
         this.clearFields();
     }
 
@@ -53,30 +72,31 @@ class System extends Component {
     }
 
     editSelectedRow() {
-
+        let bod = this.props.bodies[this.state.selected];
+        this.setState({
+            editing: true,
+            r: bod.position,
+            v: bod.velocity,
+            name: bod.name,
+            mass: bod.mass,
+            bodyRadius: bod.radius,
+        })
     }
 
     removeSelected() {
         this.props.removeBody(this.props.bodies[this.state.selected].id);
-        this.setState({selected: -1});
+        if (!this.props.bodies.length > 0 || this.state.selected >= this.props.bodies.length - 1) {
+            this.setState({selected: -1});
+        }
     }
 
     saveSelected() {
-        let savedBodies = getSaved(USER_BODIES);
         let selBody = this.props.bodies[this.state.selected];
-        save(USER_BODIES, {...savedBodies,
-            [selBody.name]: this.props.bodies[this.state.selected]
-        });
-        super.forceUpdate();
+        this.props.saveBody(selBody);
     }
 
-    canSave() {
-        if (this.state.selected >= 0) {
-            let selID = this.props.bodies[this.state.selected].id;
-            return !(Object.values(getSaved(USER_BODIES)).filter((obj) => obj.id === selID).length > 0);
-        } else {
-            return false;
-        }
+    removeFromSaved() {
+        this.props.removeSavedBody(this.props.bodies[this.state.selected].id);
     }
 
     cancel() {
@@ -117,14 +137,14 @@ class System extends Component {
 
     toggleAdd() {
         this.setState({
-            adding: !this.state.adding,
-            selected: (!this.state.adding) ? -1 : this.state.selected
+            editing: !this.state.editing,
+            selected: (!this.state.editing) ? -1 : this.state.selected
         })
     }
 
     clearFields() {
         this.setState({
-            adding: false,
+            editing: false,
             valid: false,
             r: [0, 0, 0],
             v: [0, 0, 0],
@@ -135,23 +155,31 @@ class System extends Component {
     }
 
     setSelectedRow(index) {
-        this.setState({selected: (index === this.state.selected) ? -1 : index})
+        if (!this.state.editing)
+            this.setState({selected: (index === this.state.selected) ? -1 : index})
+    }
+
+    isSaved() {
+        if (this.state.selected >= 0) {
+            let selID = this.props.bodies[this.state.selected].id;
+            return !(Object.values(getSaved(USER_BODIES)).filter((obj) => obj.id === selID).length > 0);
+        } else { return false }
     }
 
     render() {
         let dim = ["x", "y", "z"];
         return (
             <div className={styles.container}>
-                { (Object.keys(savedBodies.defaults || {}).length > 0) &&
+                { (Object.keys(this.props.savedBodies.defaults || {}).length > 0) &&
                     <div className={styles.section}>
                         <SectionHeader title={"Default Bodies"}/>
-                        <SystemBodySelector bodies={savedBodies.defaults} callback={this.addSavedBody.bind(this)}/>
+                        <SystemBodySelector bodies={this.props.savedBodies.defaults} callback={this.addSavedBody.bind(this)}/>
                     </div>
                 }
-                { (Object.keys(savedBodies.saved || {}).length > 0) &&
+                { (Object.keys(this.props.savedBodies.saved || {}).length > 0) &&
                 <div className={styles.section}>
                     <SectionHeader title={"Saved Bodies"}/>
-                    <SystemBodySelector bodies={savedBodies.saved} callback={this.addSavedBody.bind(this)}/>
+                    <SystemBodySelector bodies={this.props.savedBodies.saved} callback={this.addSavedBody.bind(this)}/>
                 </div>
                 }
                 <div className={styles.section}>
@@ -162,7 +190,7 @@ class System extends Component {
                         setSelected={this.setSelectedRow.bind(this)}
                     />
                     {
-                        this.state.adding &&
+                        this.state.editing &&
                         <div className={styles.formContainer}>
                             <div className={styles.formRow}>
                                 <div>
@@ -202,16 +230,27 @@ class System extends Component {
                         </div>
                     }
                     {
-                        (!this.state.adding) ?
+                        (!this.state.editing) ?
                         <div className={styles.buttonRow}>
-                            <button onClick={this.toggleAdd.bind(this)}>New Body</button>
-                            {/*<button onClick={this.editSelectedRow.bind(this)} disabled={!(this.state.selected >= 0) }>Edit</button>*/}
-                            <button onClick={this.removeSelected.bind(this)} disabled={!(this.state.selected >= 0)}>Delete</button>
-                            <button onClick={this.saveSelected.bind(this)} disabled={!(this.canSave())}>Save Selected</button>
+                            <div>
+                                <button onClick={this.toggleAdd.bind(this)}>New Body</button>
+                                <button onClick={this.editSelectedRow.bind(this)} disabled={!(this.state.selected >= 0) }>Edit</button>
+                                <button onClick={this.removeSelected.bind(this)} disabled={!(this.state.selected >= 0)}>Delete</button>
+                            </div>
+                            {(this.state.selected >= 0) &&
+                                <div>
+                                    { (this.isSaved()) ?
+                                        <button onClick={this.saveSelected.bind(this)}>Save Body</button> :
+                                        <button onClick={this.removeFromSaved.bind(this)}>Remove from Saved</button>
+                                        }
+                                </div>
+                            }
                         </div> :
                         <div className={styles.buttonRow}>
-                            <button onClick={this.addValidBody.bind(this)} disabled={!this.state.valid}>Add</button>
-                            <button onClick={this.cancel.bind(this)}>Cancel</button>
+                            <div>
+                                <button onClick={this.addValidBody.bind(this)} disabled={!this.state.valid}>Add</button>
+                                <button onClick={this.cancel.bind(this)}>Cancel</button>
+                            </div>
                         </div>
                     }
                 </div>
@@ -250,30 +289,21 @@ const SectionHeader = (props) => {
     </div>)
 };
 
-const mapStateToProps = state => {
-    return {
-        bodies: getBodies(state),
-        steps: getSteps(state),
-        stepSize: getStepSize(state),
-    }
-};
+const mapStateToProps = state => ({
+    bodies: getBodies(state),
+    steps: getSteps(state),
+    stepSize: getStepSize(state),
+    savedBodies: getSavedBodies(state),
+});
 
-const mapDispatchToEvents = (dispatch) => {
-    return {
-        addBody: (body) => {
-            dispatch(addBody(body))
-        },
-        removeBody: (id) => {
-            dispatch(removeBodyById(id))
-        },
-        setSteps: (steps) => {
-            dispatch(setSteps(steps))
-        },
-        setStepSize: (steps) => {
-            dispatch(setStepSize(steps))
-        }
-    }
-};
+const mapDispatchToEvents = dispatch => ({
+    addBody: (body) => dispatch(action(ADD_BODY, body)),
+    removeBody: (id) => dispatch(action(REMOVE_BODY_BY_ID, id)),
+    setSteps: (steps) => dispatch(action(SET_STEPS, steps)),
+    setStepSize: (steps) => dispatch(action(SET_STEP_SIZE, steps)),
+    removeSavedBody: (id) => dispatch(action(DELETE_SAVED_USER_BODY, id)),
+    saveBody: (body) => dispatch(action(SAVE_USER_BODY, body)),
+});
 
 export default connect(mapStateToProps, mapDispatchToEvents)(System);
 

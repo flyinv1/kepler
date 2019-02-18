@@ -1,0 +1,28 @@
+
+.container {
+    border: 1.5px solid var(--button_border);
+}
+
+.counter {
+    display: inline-block;
+    padding: 0.3rem;
+    margin: auto;
+    min-width: 3.5rem;
+}
+
+.countWrapper {
+    padding: 0.3rem;
+    display: inline-block;
+
+    p {
+        display: inline-block;
+        border: 1.5px solid var(--button_border);
+        padding: 0.2rem;
+        margin: 0 0.2rem;
+    }
+
+    p:hover {
+        border-color: var(--light_border);
+        color: var(--primary);
+    }
+}

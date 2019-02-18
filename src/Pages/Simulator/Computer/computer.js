@@ -12,8 +12,11 @@ export default class Computer extends Component {
 
     render() {
         return (
-            <div className={""}>
-                Use these useful functions to help generate a system!
+            <div style={{
+                padding: '2rem'
+            }}>
+                <h2>Coming Soon</h2>
+                This tab will contain various methods to characterize orbits and convert to useful r,v coordinates.
             </div>
         )
     }

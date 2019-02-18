@@ -1,0 +1,11 @@
+
+.orbitPath {
+    fill: transparent;
+    stroke: var(--border);
+    stroke-width: 0.01px;
+}
+
+.body {
+    fill: var(--primary);
+    z-index: 9999;
+}

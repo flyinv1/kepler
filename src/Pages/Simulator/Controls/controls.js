@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styles from './controls.module.scss';
-import {clearLogs, dispatchLog, saveComputation} from "../../../Redux/Actions";
-import {getBodies, getSteps, getStepSize} from "../../../Redux/Selectors";
+import action from "../../../Redux/action";
+import {getBodies, getSteps, getStepSize} from "../../../Redux/selectors";
 import {connect} from "react-redux";
-import integrateSystem from "../../../Computation/symplecticEuler";
-import {save} from "../../../Redux/Storage";
+import {save} from "../../../Redux/storage";
+import integrateSystem from '../../../Computation/symplecticEuler';
+import {CLEAR_LOGS, DISPATCH_LOG, SET_HISTORY} from "../../../Redux/constants";
 
 const COMP = { idle: 'IDLE', running: 'RUNNING', done: 'DONE' };
 
@@ -13,12 +14,16 @@ class Controls extends Component {
         super(props);
         this.state = {
             computerState: COMP.idle,
+            index: 0,
         }
+    }
+
+    componentDidMount() {
     }
 
     startIntegration() {
         this.setState({
-            computerState: COMP.running
+            computerState: COMP.running,
         });
         this.props.log({
             tag: "",
@@ -28,22 +33,17 @@ class Controls extends Component {
             tag: "Initial State",
             content: this.props.bodies
         });
-        //Ensure the state is updated to 'running' before taking up all of the computer's resources :/
-        //TODO:: Convert to asynchronous function
-        setTimeout(() => {
-            let bodies = integrateSystem(this.props.bodies, this.props.stepSize, this.props.steps, () => {
-                this.setState({
-                    computerState: COMP.done
-                })
-            }, (state) => {if (state) console.log(state)});
-            this.props.saveComputation(bodies);
-            this.props.log({
-                tag: "Results",
-                content: bodies[bodies.length - 1],
+
+        let results = integrateSystem(this.props.bodies, this.props.stepSize, this.props.steps, () => {},
+            () => {
+                this.setState({computerState: COMP.done})
             });
-            console.log(bodies);
-            save("HISTORY", bodies);
-        }, 100);
+        // console.log("history: ", history);
+        this.props.saveComputation(results);
+        this.props.log({
+            tag: "Results",
+            content: results.history[results.history.length - 1],
+        });
     }
 
     terminate() {
@@ -71,10 +71,10 @@ class Controls extends Component {
 
     }
 
-    renderComputationState() {
+    render() {
         switch (this.state.computerState) {
             case COMP.running:
-                return(
+                return (
                     <div className={styles.container}>
                         <div className={styles.left}>
                             Computation running...
@@ -87,7 +87,7 @@ class Controls extends Component {
                     </div>
                 );
             case COMP.done:
-                return(
+                return (
                     <div className={styles.container}>
                         <div className={styles.left}>
                             Finished!
@@ -96,12 +96,12 @@ class Controls extends Component {
                             <button onClick={this.clearEngine.bind(this)}>
                                 Done
                             </button>
-                            <button onClick={this.saveSystemState.bind(this)}>Save Current System State</button>
+                            {/*<button onClick={this.saveSystemState.bind(this)}>Save Current System State</button>*/}
                         </div>
                     </div>
                 );
             default:
-                return(
+                return (
                     <div className={styles.container}>
                         <div className={styles.left}>
                             <button onClick={this.startIntegration.bind(this)}>
@@ -129,32 +129,18 @@ class Controls extends Component {
                 );
         }
     }
-
-    render() {
-        return (this.renderComputationState());
-    }
 }
 
-const mapStateToProps = state => {
-    return {
-        bodies: getBodies(state),
-        steps: getSteps(state),
-        stepSize: getStepSize(state),
-    }
-};
+const mapStateToProps = state => ({
+    bodies: getBodies(state),
+    steps: getSteps(state),
+    stepSize: getStepSize(state),
+});
 
-const mapDispatchToEvents = (dispatch) => {
-    return {
-        saveComputation: (history) => {
-            dispatch(saveComputation(history))
-        },
-        log: (log) => {
-            dispatch(dispatchLog(log))
-        },
-        clearLogs: () => {
-            dispatch(clearLogs());
-        }
-    }
-};
+const mapDispatchToEvents = dispatch => ({
+    saveComputation: (history) => dispatch(action(SET_HISTORY, history)),
+    log: (log) => dispatch(action(DISPATCH_LOG, log)),
+    clearLogs: () => dispatch(action(CLEAR_LOGS, {})),
+});
 
 export default connect(mapStateToProps, mapDispatchToEvents)(Controls);

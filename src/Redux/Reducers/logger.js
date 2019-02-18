@@ -1,5 +1,5 @@
 import {CLEAR_LOGS, DISPATCH_LOG, LOGS} from "../constants";
-import {cache, getCached} from "../Storage";
+import {cache, getCached} from "../storage";
 
 const initialState = {
     logs: getCached(LOGS) || [

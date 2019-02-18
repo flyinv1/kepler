@@ -1,5 +1,5 @@
 import {ADD_BODY, BODIES, REMOVE_BODY_BY_ID, SET_STEP_SIZE, SET_STEPS, STEP_SIZE, STEPS} from "../constants";
-import {cache, getCached} from "../Storage";
+import {cache, getCached} from "../storage";
 
 const initialState = {
     bodies: getCached(BODIES) || [],

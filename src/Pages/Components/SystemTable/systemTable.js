@@ -12,7 +12,7 @@ const SystemTable = (props) => {
                 <tr className={styles.tableHeader}>
                     <td>Name</td>
                     <td>r [km]</td>
-                    <td>v [km]</td>
+                    <td>v [km/s]</td>
                     <td>M [kg]</td>
                     <td>R [km]</td>
                 </tr>

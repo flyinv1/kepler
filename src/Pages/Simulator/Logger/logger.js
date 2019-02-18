@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import styles from './logger.module.scss';
-import { getLogs } from "../../../Redux/Selectors";
-import { clearLogs } from "../../../Redux/Actions";
+import { getLogs } from "../../../Redux/selectors";
 import {currentDateString} from "../../../utils";
-
 
 class Logger extends Component {
 
@@ -50,18 +48,8 @@ LogItem.propTypes = {
     children: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => {
-    return {
-        logs: getLogs(state),
-    }
-};
+const mapStateToProps = state => ({
+    logs: getLogs(state),
+});
 
-const mapDispatchToEvents = (dispatch) => {
-    return {
-        clearConsole: () => {
-            dispatch(clearLogs)
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToEvents)(Logger);
+export default connect(mapStateToProps, null)(Logger);

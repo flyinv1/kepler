@@ -11,7 +11,12 @@ export function save(key, data) {
 }
 
 export function getSaved(key) {
-    return JSON.parse(localStorage.getItem(key));
+    let saved = localStorage.getItem(key);
+    if (saved) { return JSON.parse(saved) } else return false;
+}
+
+export function removeSaved(key) {
+    return localStorage.removeItem(key);
 }
 
 

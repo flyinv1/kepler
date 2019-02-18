@@ -17,7 +17,7 @@ const SystemBodySelector = (props) => {
 };
 
 SystemBodySelector.propTypes = {
-    bodies: PropTypes.array.isRequired,
+    bodies: PropTypes.object.isRequired,
     callback: PropTypes.func.isRequired,
 };
 

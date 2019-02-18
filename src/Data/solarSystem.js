@@ -46,7 +46,7 @@ export default {
         name: "Mars",
         mass: 6.39e23,
         radius: 3389.5,
-        position: [0, 206.6545e8, 0],
+        position: [0, 206.6545e6, 0],
         velocity: [-26.5, 0, 0],
     }
 }
