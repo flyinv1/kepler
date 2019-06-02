@@ -1,5 +1,4 @@
-### ~~Keplerian Orbit Simulator~~
+# Kepler
 
-# N-body solver
+Kepler is an N-Body celestial mechanics simulator built on ThreeJS, WebGL, and ReactJS.
 
-An n-body simulation using the semi-implicit euler iterative method.

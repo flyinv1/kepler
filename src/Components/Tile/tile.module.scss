@@ -1,0 +1,8 @@
+.container {
+    background-color: var(--tile-bg);
+    border: 1px solid var(--tile-border);
+    box-shadow: 0 4px 8px var(--shadow-tile);
+    border-radius: var(--rad);
+    width: 200px;
+    padding: 16px;
+}

@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: stretch;
+    width: 200px;
+    height: 32px;
+    border: 1.5px solid var(--accent);
+    border-radius: var(--rad);
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tab {
+    background-color: transparent;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.tab:not(:last-child) {
+    border-right: 1.5px solid var(--accent);
+}
+
+.selected {
+    background-color: var(--accent);
+    color: var(--tab-selected);
+}
+
+.tab:not(.selected):hover {
+    background-color: var(--tile-bg);
+}
+
+

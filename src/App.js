@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-
-//Pages
-import Landing from "./Pages/Landing/landing";
-import Simulator from "./Pages/Simulator/simulator";
-import NotFound from "./Pages/NotFound/notFound.js";
-import symplecticeuler from "./Computation/symplecticEuler";
-import Docs from "./Pages/Docs/docs";
+import Simulator from 'App/Sim';
+import Landing from 'App/Landing';
 
 const Pages = {
-    '': Landing,
-    '#/': Landing,
-    '#/simulator': Simulator,
-    '#/docs': Docs
+    "": Landing,
+    "simulator": Simulator,
 };
 
 class App extends Component {
@@ -32,10 +25,14 @@ class App extends Component {
     }
 
     render() {
-        let Page = Pages[this.state.location] || NotFound;
+        const location = this.state.location.slice(2);
+        let Page = Pages[location] || Landing;
+        const nav = {
+            location: location
+        };
         return (
             <div className="App">
-                <Page/>
+               <Page nav={nav}/>
             </div>
         );
     }

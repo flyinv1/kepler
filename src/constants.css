@@ -1,9 +1,51 @@
 :root {
-    --primary: #2BD33F;
-    --border: #0C5A15;
-    --button_border: #0B7417;
-    --label: #0B7417;
-    --light_border: #0FAF22;
-    --background: #161616;
-    --select: #292929;
+
+    --accent: #2FD87D;
+    --accent-dark: #08A04E;
+    --danger: #F05555;
+
+    --app-bg: #101010;
+
+    --tile-bg: #1C1C1C;
+    --tile-border: #2F2F2F;
+
+    --text-title: #FAFAFA;
+    --text-secondary-title: #969696;
+    --text-body: #E6E6E6;
+    --text-header: #A7A7A7;
+    --text-label: #969696;
+    --text-light: #FFFFFF;
+    --text-hint: #9F9F9F;
+    --text-placeholder: #969696;
+
+    /*for limited use*/
+    --button-bg-light: #B5B5B5;
+
+    /*medium button has no border*/
+    --button-bg-medium: #3C3C3C;
+
+    /*dark button is on dark / app bg*/
+    --button-bg-dark: #1C1C1C;
+    --button-border-dark: #2F2F2F;
+
+    /*dropdown*/
+    --dropdown-bg: #1C1C1C;
+    --dropdown-border: #363636;
+    --dropdown-text: #E6E6E6;
+    --dropdown-bg-hover: #242424;
+
+    /*text input*/
+    --input-bg: #313131;
+
+    /*tab controller*/
+    --tab-selected: #101010;
+
+    /*Standard radius*/
+    --rad: 4px;
+
+    --shadow-dropdown: rgba(0, 0, 0, 0.2);
+    --shadow-tile: rgba(0, 0, 0, 0.4);
+
+    --tooltip-bg: #3B3B3B;
+
 }

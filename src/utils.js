@@ -2,16 +2,15 @@ export function nav(to) {
     return `/#/${to || ""}`;
 }
 
+export function style(...args) {
+    return args.join(' ');
+}
+
 /**
  * @return {number}
  */
 export function AUtokm(au) {
     return 1.49597871*au;
-}
-
-// TODO:: Use vector normalization function from computation
-export function checkNormalization(arr) {
-    return Math.sqrt(arr.reduce((acc, n) => acc + Math.pow(parseFloat(n), 2), 0)) || 0;
 }
 
 export function randomTag() {
