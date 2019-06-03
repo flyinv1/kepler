@@ -6,6 +6,8 @@ import Dropdown from "Components/Dropdown/Dropdown";
 import Tile from "Components/Tile/Tile";
 import Tooltip from "Components/Tooltip/Tooltip";
 import {nav} from "utils";
+import {IconButton, TextButton} from "Components/Button/Button";
+import {AddButton} from "Components/Button";
 
 const options = ['Symplectic Euler', 'Standard Euler', 'Galactic', 'GPU - WebGL'];
 
@@ -50,7 +52,7 @@ export default class Simulator extends Component {
                     <h1>Test</h1>
                     <span>Child content</span>
                 </Tile>
-                <ThreeContainer className={styles.container}/>
+                <ThreeContainer className={styles.container} type={'dark'}/>
             </div>
         )
     }

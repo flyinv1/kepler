@@ -3,7 +3,7 @@
     user-select: none;
     height: 32px;
     width: 200px;
-    border: 1px solid var(--dropdown-border);
+    border: 1px solid var(--border);
     background-color: var(--dropdown-bg);
     border-radius: var(--rad);
     cursor: pointer;
@@ -14,10 +14,11 @@
     position: absolute;
     top: 40px;
     background-color: var(--dropdown-bg);
-    border: 1px solid var(--dropdown-border);
+    border: 1px solid var(--border);
     border-radius: var(--rad);
     min-width: 200px;
     box-shadow: 0 4px 8px var(--shadow-dropdown);
+    z-index: 1000;
 }
 
 .activeOption {

@@ -1,5 +1,7 @@
 :root {
 
+    --border: #2F2F2F;
+
     --accent: #2FD87D;
     --accent-dark: #08A04E;
     --danger: #F05555;
@@ -7,7 +9,6 @@
     --app-bg: #101010;
 
     --tile-bg: #1C1C1C;
-    --tile-border: #2F2F2F;
 
     --text-title: #FAFAFA;
     --text-secondary-title: #969696;
@@ -26,11 +27,9 @@
 
     /*dark button is on dark / app bg*/
     --button-bg-dark: #1C1C1C;
-    --button-border-dark: #2F2F2F;
 
     /*dropdown*/
     --dropdown-bg: #1C1C1C;
-    --dropdown-border: #363636;
     --dropdown-text: #E6E6E6;
     --dropdown-bg-hover: #242424;
 

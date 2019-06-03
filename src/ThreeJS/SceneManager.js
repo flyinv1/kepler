@@ -41,11 +41,18 @@ export default canvas => {
 
     function createSceneSubjects(scene) {
     //    Test Cube:
-        let geometry = new THREE.SphereGeometry(10, 20, 20);
+        const dens = 1;
+
+        let geometry = new THREE.SphereGeometry(10, dens, dens);
         let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         let sphere = new THREE.Mesh( geometry, material );
         let lightAmbient = new THREE.AmbientLight(0x404040);
         let lightIn = new THREE.PointLight("#4CAF50", 1);
+
+
+
+
+
         scene.add(sphere, lightAmbient, lightIn);
         return [sphere, lightAmbient];
     }

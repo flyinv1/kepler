@@ -13,11 +13,24 @@ class Dropdown extends Component {
             expanded: false
         };
         this.toggle = this.toggle.bind(this);
+        this.hideOnBlur = this.hideOnBlur.bind(this);
+    }
+
+    hideOnBlur(event) {
+        if (event.target !== this.dropdown && !this.dropdown.contains(event.target)) {
+            this.toggle();
+        }
     }
 
     toggle() {
         this.setState({
             expanded: !this.state.expanded
+        }, () => {
+            if (this.state.expanded) {
+                window.addEventListener('click', this.hideOnBlur)
+            } else {
+                window.removeEventListener('click', this.hideOnBlur)
+            }
         })
     }
 
@@ -29,7 +42,7 @@ class Dropdown extends Component {
         const expandedStyle = (this.state.expanded) ? styles.expanded : '';
 
         return (
-            <div className={style(styles.container, this.props.className)} onClick={this.toggle}>
+            <div className={style(styles.container, this.props.className)} onClick={this.toggle} ref={el => this.dropdown = el}>
                 <div className={style(styles.activeOption, activeStyle, expandedStyle)}>
                     <span>{activeContent}</span>
                     <img src={rightArrow} alt={''}/>
@@ -48,7 +61,7 @@ class Dropdown extends Component {
             </div>
         )
     }
-};
+}
 
 Dropdown.propTypes = {
     options: PropTypes.array.isRequired,

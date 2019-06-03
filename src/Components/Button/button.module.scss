@@ -1,0 +1,65 @@
+.container {
+    height: 32px;
+    padding: 0 20px;
+    border-radius: var(--rad);
+    //user-select: none;
+    transition: filter 100ms;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    width: 100%;
+}
+
+.iconContainer {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    border-radius: var(--rad);
+}
+
+.icon {
+    object-fit: contain;
+}
+
+.container:not(:disabled), .iconContainer:not(:disabled) {
+    cursor: pointer;
+}
+
+.container:hover:not(:disabled), .iconContainer:hover:not(:disabled)  {
+    filter: brightness(110%);
+}
+
+.container:active:not(:disabled), .iconContainer:active:not(:disabled)  {
+    filter: brightness(95%);
+}
+
+.textButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.darkButton {
+    background-color: var(--button-bg-dark);
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.primaryButton {
+    background-color: var(--accent);
+    color: var(--tab-selected);
+    font-weight: 600;
+}
+
+.secondaryButton {
+    background-color: var(--button-bg-medium);
+    color: var(--accent);
+}
+
+.container:disabled, .iconContainer:disabled {
+    opacity: 0.70;
+}

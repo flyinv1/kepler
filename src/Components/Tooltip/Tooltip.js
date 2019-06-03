@@ -13,13 +13,13 @@ const locations = {
 const Tooltip = (props) => {
     const loc = locations[props.location] || locations['top'];
     return(
-        <>
+        <div className={styles.container}>
             {props.children}
             <div className={style(styles.tipWrapper, loc)}>
                 {props.tipContent}
                 <div className={styles.arrow}/>
             </div>
-        </>
+        </div>
     )
 };
 
