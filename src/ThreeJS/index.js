@@ -1,2 +1,2 @@
-export { default as ThreeContainer } from './ThreeContainer';
-export { default as SceneManager } from './SceneManager'
+import Renderer from './Renderer/Renderer';
+export { Renderer };

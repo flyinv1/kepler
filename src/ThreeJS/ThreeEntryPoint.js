@@ -1,9 +1,9 @@
 import SceneManager from './SceneManager';
 
-// Attach canvas to DOM element registered in ThreeContainer
-export default containerElement => {
+// Attach canvas to DOM element registered in Renderer
+export default (containerElement, shaders) => {
     const canvas = createCanvas(document, containerElement);
-    const sceneManager = new SceneManager(canvas);
+    const sceneManager = new SceneManager(canvas, shaders);
 
     bindEventListeners();
     render();
