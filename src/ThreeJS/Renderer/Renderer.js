@@ -4,7 +4,6 @@ import styles from './renderer.module.scss';
 
 import {makeRequest} from "../../utils";
 import LoadingIcon from "Components/LoadingIcon/LoadingIcon";
-
 const shaderArr = [
     'test'
 ];
