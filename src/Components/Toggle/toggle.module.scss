@@ -1,0 +1,35 @@
+.wrapper {
+    background-color: var(--input-bg);
+    height: 24px;
+    width: 40px;
+    border-radius: 12px;
+    position: relative;
+    transition: background-color 150ms;
+    cursor: pointer;
+}
+
+.knob {
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    background-color: var(--button-bg-light);
+    box-shadow: 0 4px 8px var(--shadow-dropdown);
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    transition: left 150ms ease-in-out, background-color 150ms;
+}
+
+.on {
+    background-color: var(--accent);
+
+    .knob {
+        left: 18px;
+        background-color: var(--text-body);
+    }
+}
+
+.disabled {
+    cursor: default;
+    opacity: 0.6;
+}

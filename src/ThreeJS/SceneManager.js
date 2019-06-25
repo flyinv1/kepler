@@ -56,15 +56,19 @@ export default (canvas, shaders) => {
         // let lightAmbient = new THREE.AmbientLight(0xFFFFFF);
         let lightIn = new THREE.PointLight("#FAFAFA", 1);
 
-        scene.add(sphere, lightIn);
-        return [sphere];
+        const sphere2 = new THREE.Mesh( geometry, material );
+
+        scene.add(sphere, sphere2, lightIn);
+        return [sphere, sphere2];
     }
 
     function update() {
         // requestAnimationFrame( update );
         let sun = sceneSubjects[0];
-        sceneSubjects[0].rotation.x += 0.01;
-        sceneSubjects[0].rotation.y += 0.02;
+        // sun.position.x += 0.1 * Math.random() * (Math.random() < 0.5 ? -1 : 1);
+        // sun.position.y += 0.11 * Math.random() * (Math.random() < 0.5 ? -1 : 1);
+        // sceneSubjects[1].position.x += 0.1 * Math.random() * (Math.random() < 0.5 ? -1 : 1);
+        // sceneSubjects[1].position.y += 0.11 * Math.random() * (Math.random() < 0.5 ? -1 : 1);
         sun.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, sun.getWorldPosition());
         renderer.render(scene, camera);
     }

@@ -2,7 +2,7 @@
     position: relative;
     user-select: none;
     height: 32px;
-    width: 200px;
+    width: var(--control-width);
     border: 1px solid var(--border);
     background-color: var(--dropdown-bg);
     border-radius: var(--rad);
@@ -16,7 +16,7 @@
     background-color: var(--dropdown-bg);
     border: 1px solid var(--border);
     border-radius: var(--rad);
-    min-width: 200px;
+    min-width: var(--control-width);
     box-shadow: 0 4px 8px var(--shadow-dropdown);
     z-index: 1000;
 }

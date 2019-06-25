@@ -17,8 +17,10 @@ class Dropdown extends Component {
     }
 
     hideOnBlur(event) {
-        if (event.target !== this.dropdown && !this.dropdown.contains(event.target)) {
-            this.toggle();
+        if (this.dropdown) {
+            if (event.target !== this.dropdown && !this.dropdown.contains(event.target)) {
+                this.toggle();
+            }
         }
     }
 
@@ -51,7 +53,7 @@ class Dropdown extends Component {
                 <div className={styles.dropContainer}>
                     {this.props.options.map((option, index) => {
                         return (
-                            <div className={style(styles.option)} key={index} onClick={() => this.props.callback(index)}>
+                            <div className={style(styles.option)} key={index} onClick={() => this.props.onClick(index)}>
                                 { option }
                             </div>
                         )
@@ -66,7 +68,7 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
     options: PropTypes.array.isRequired,
     selected: PropTypes.number.isRequired,
-    callback: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default Dropdown;

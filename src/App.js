@@ -17,6 +17,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        //TODO:: Add query support
         window.addEventListener("hashchange", () => {
             this.setState({
                 location: window.location.hash

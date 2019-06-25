@@ -3,6 +3,10 @@
     border: 1px solid var(--border);
     box-shadow: 0 4px 8px var(--shadow-tile);
     border-radius: var(--rad);
-    width: 200px;
-    padding: 16px;
+    width: var(--control-width);
+    padding: 12px;
+
+    button {
+        width: 100%;
+    }
 }

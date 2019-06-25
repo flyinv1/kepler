@@ -2,3 +2,93 @@
     width: 100vw;
     height: 100vh;
 }
+
+.guiWrapper {
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.column {
+    width: calc((100vw - 48px) / 3);
+    height: calc(100vh - 48px);
+    margin: 24px;
+}
+
+// Spread two divs vertically
+// Don't change the name, its fun
+.verticalizer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.left {
+    align-items: flex-start;
+}
+
+.center {
+    align-items: center;
+}
+
+.status {
+    display: flex;
+    flex-direction: column;
+    color: var(--accent);
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.forms > div {
+    margin-bottom: 16px;
+}
+
+.formElement {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        display: inline-block;
+        margin-bottom: 2px;
+    }
+}
+
+.formElement:not(:first-child) {
+    margin-top: 16px;
+}
+
+.formElement:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.planetList {
+    margin: 16px 0;
+    border-top: 1px solid var(--border);
+}
+
+.planetRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.toggleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggleRow:not(:last-child) {
+    margin-bottom: 16px;
+}

@@ -5,13 +5,13 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Source Sans Pro', serif;
 }
 
 /*Set defaults*/
 
 body {
     background-color: var(--app-bg);
-    font-family: 'Source Sans Pro', sans-serif;
     color: var(--text-body);
     font-size: 14px;
 }
@@ -19,6 +19,7 @@ body {
 a {
     color: var(--accent);
     text-decoration: none;
+    display: inline-block;
 }
 
 a:visited {
@@ -28,19 +29,47 @@ a:visited {
 
 h1 {
     color: var(--text-title);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: normal;
 }
 
 h2 {
     color: var(--text-secondary-title);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
 }
 
 h3 {
     color: var(--text-title);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
 }
 
+label {
+    color: var(--text-label);
+    font-size: 12px;
+}
+
+input {
+    height: 32px;
+    background-color: var(--input-bg);
+    color: var(--text-body);
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: var(--rad);
+    font-size: 14px;
+    padding-left: 10px;
+    width: var(--control-width);
+}
+
+input[type=number] {
+    width: calc(var(--control-width) / 2.5);
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

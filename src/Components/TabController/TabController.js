@@ -8,7 +8,7 @@ const TabController = (props) => {
         <div className={style(styles.container, props.className)}>
             { props.tabs.map((tab, index) => {
                 const sel = (index === props.selected) ? styles.selected : '';
-                return <div className={style(styles.tab, sel)} key={index} onClick={() => props.callback(index)}>{tab}</div>
+                return <div className={style(styles.tab, sel)} key={index} onClick={() => props.onClick(index)}>{tab}</div>
             })}
         </div>
     )
@@ -17,7 +17,7 @@ const TabController = (props) => {
 TabController.propTypes = {
     tabs: PropTypes.array.isRequired,
     selected: PropTypes.number.isRequired,
-    callback: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default TabController;
