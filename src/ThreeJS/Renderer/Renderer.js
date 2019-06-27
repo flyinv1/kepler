@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import threeEntryPoint from '../ThreeEntryPoint';
+import threeEntryPoint from '../Scene';
 import styles from './renderer.module.scss';
 
 import {makeRequest} from "../../utils";
 import LoadingIcon from "Components/LoadingIcon/LoadingIcon";
 const shaderArr = [
-    'test'
+    'sun.frag',
+    'sun.vert',
+    'velocity.frag',
+    'position.frag',
 ];
 
 export default class Renderer extends Component {
@@ -25,7 +28,7 @@ export default class Renderer extends Component {
                 const fileName = responseURLFrag[responseURLFrag.length - 1];
                 const shaderName = fileName.split('.')[0];
                 const fileType = fileName.split('.')[1];
-                if (!obj.hasOwnProperty(shaderName)) obj[shaderName] = {vert: '', frag: ''}
+                if (!obj.hasOwnProperty(shaderName)) obj[shaderName] = {vert: '', frag: ''};
                 obj[shaderName][fileType] = shader.responseText;
                 return obj
             }, {});
@@ -35,10 +38,11 @@ export default class Renderer extends Component {
     }
 
     requestShaders(shaderArr, callback) {
-        Promise.all(shaderArr.map(fileName => [
-            `Shaders/${fileName}.vert`,
-            `Shaders/${fileName}.frag`
-        ]).flat().map(url => makeRequest(url))).then(output => callback(output));
+        // Promise.all(shaderArr.map(fileName => [
+        //     `Shaders/${fileName}.vert`,
+        //     `Shaders/${fileName}.frag`
+        // ]).flat().map(url => makeRequest(url))).then(output => callback(output));
+        Promise.all(shaderArr.map(url => makeRequest(`Shaders/${url}`))).then(output => callback(output));
     }
 
     render() {

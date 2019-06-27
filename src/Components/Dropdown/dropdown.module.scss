@@ -12,13 +12,14 @@
 
 .dropContainer {
     position: absolute;
-    top: 40px;
+    top: 36px;
     background-color: var(--dropdown-bg);
     border: 1px solid var(--border);
     border-radius: var(--rad);
     min-width: var(--control-width);
     box-shadow: 0 4px 8px var(--shadow-dropdown);
     z-index: 1000;
+    transform: translateX(-1px);
 }
 
 .activeOption {

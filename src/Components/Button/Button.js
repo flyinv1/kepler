@@ -12,7 +12,7 @@ const buttonStyles = {
 
 const TextButton = (props) => {
     return(
-        <button onClick={props.onClick} className={style(styles.container, styles.textButton, buttonStyles[props.type] || buttonStyles['secondary'])} {...props}>
+        <button onClick={props.onClick} className={style(styles.container, styles.textButton, buttonStyles[props.type] || buttonStyles['secondary'], props.className || '')}>
             {props.children}
         </button>
     )

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { Renderer } from 'ThreeJS';
+import Renderer from 'ThreeJS/Renderer/Renderer';
 import styles from './sim.module.scss';
 import {nav, style} from "utils";
 import {TextButton} from "Components/Button/Button";
@@ -20,6 +20,7 @@ const initialState = {
     procedureType: 0,
     integrationType: 0,
     bodyCount: 1096,
+    hidden: false,
 };
 
 const planets = [
@@ -69,9 +70,17 @@ export default class Simulator extends Component {
     }
 
     render() {
+
         return(
             <div className={styles.container}>
                 <Renderer/>
+
+                <TextButton type={'basic'} className={styles.hideButton} onClick={() => {
+                    this.setState({hidden: !this.state.hidden})
+                }}>{(!this.state.hidden) ? 'Hide' : 'Show'} Interface</TextButton>
+
+                { (!this.state.hidden) &&
+
                 <div className={styles.guiWrapper}>
 
                     <div className={style(styles.column, styles.verticalizer, styles.left)}>
@@ -83,7 +92,6 @@ export default class Simulator extends Component {
                     </div>
 
                     <div className={style(styles.column, styles.verticalizer, styles.center)}>
-                        <TextButton type={'basic'}>Hide Interface</TextButton>
                         <div className={styles.animationControls}>
                         </div>
                     </div>
@@ -115,7 +123,7 @@ export default class Simulator extends Component {
                                             <Dropdown options={procedureOptions} selected={this.state.procedureType} onClick={this.selectProcedure}/>
                                         </div>
                                         <div className={styles.formElement}>
-                                            <label>Bodies</label>
+                                            <label>Body [N2]</label>
                                             <input type={'number'} placeholder={'Bodies'} value={this.state.bodyCount} onChange={e => this.setState({bodyCount: e.target.value})}/>
                                         </div>
                                         <TextButton type={'primary'}>Generate</TextButton>
@@ -137,20 +145,20 @@ export default class Simulator extends Component {
                             <Tile>
                                 <div className={styles.toggleRow}>
                                     <span>Cinematic Render</span>
-                                    <Toggle on={false} onClick={() => {}}/>
+                                    <Toggle on={true} disabled={true} onClick={() => {}}/>
                                 </div>
                                 <div className={styles.toggleRow}>
                                     <span>Show Logs</span>
-                                    <Toggle on={false} onClick={() => {}}/>
+                                    <Toggle on={true} disabled={true} onClick={() => {}}/>
                                 </div>
                                 <div className={styles.toggleRow}>
                                     <span>Draw Paths</span>
-                                    <Toggle on={false} onClick={() => {}}/>
+                                    <Toggle on={true} onClick={() => {}}/>
                                 </div>
                             </Tile>
                         </div>
                     </div>
-                </div>
+                </div> }
             </div>
         )
     }

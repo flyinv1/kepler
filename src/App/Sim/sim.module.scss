@@ -92,3 +92,10 @@
 .toggleRow:not(:last-child) {
     margin-bottom: 16px;
 }
+
+.hideButton {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
